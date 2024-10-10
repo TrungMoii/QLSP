@@ -78,3 +78,47 @@ public class ProductManager {
         }
         System.out.println("Không tìm thấy sản phẩm.");
     }
+// Tìm kiếm sản phẩm: theo tên, theo ID
+    public void searchProducts() {
+        int choice;
+        do {
+            System.out.println("1. Tìm kiếm theo tên");
+            System.out.println("2. Tìm kiếm theo ID");
+            System.out.println("0. Quay lại");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Bỏ qua dòng trống
+            switch (choice) {
+                case 1:
+                    searchByName();
+                    break;
+                case 2:
+                    searchById();
+                    break;
+                case 0:
+                    System.out.println("Quay lại menu chính.");
+                    break;
+                default:
+                    System.out.println("Lựa chọn không hợp lệ.");
+            }
+        } while (choice != 0);
+    }
+
+    private void searchByName() {
+        System.out.print("Nhập tên sản phẩm: ");
+        String name = scanner.nextLine();
+        for (Product product : products) {
+            if (product.getName().equalsIgnoreCase(name)) {
+                System.out.println(product);
+            }
+        }
+    }
+
+    private void searchById() {
+        System.out.print("Nhập ID sản phẩm: ");
+        String id = scanner.nextLine();
+        for (Product product : products) {
+            if (product.getId().equals(id)) {
+                System.out.println(product);
+            }
+        }
+    }
