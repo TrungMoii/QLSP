@@ -122,3 +122,65 @@ public class ProductManager {
             }
         }
     }
+// Hiển thị sản phẩm
+    public void displayProducts() {
+        System.out.println("Danh sách sản phẩm:");
+        for (Product product : products) {
+            System.out.println(product);
+        }
+    }
+
+    // Lưu sản phẩm vào tệp
+    private void saveProductsToFile() {
+        try (FileWriter writer = new FileWriter(FILE_NAME)) {
+            for (Product product : products) {
+                writer.write(product.toString() + "\n");
+            }
+        } catch (IOException e) {
+            System.out.println("Lỗi khi lưu dữ liệu sản phẩm: " + e.getMessage());
+        }
+    }
+
+    // Tải sản phẩm từ tệp
+    private void loadProductsFromFile() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                products.add(Product.fromString(line));
+            }
+        } catch (IOException e) {
+            System.out.println("Không thể đọc dữ liệu sản phẩm từ tệp.");
+        }
+    }
+
+    // Menu chính
+    public void showMenu() {
+        int choice;
+        do {
+            System.out.println("=== MENU CHÍNH ===");
+            System.out.println("1. Quản lý sản phẩm");
+            System.out.println("2. Tìm kiếm sản phẩm");
+            System.out.println("3. Hiển thị sản phẩm");
+            System.out.println("0. Thoát");
+            System.out.print("Chọn: ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Bỏ qua dòng trống
+            switch (choice) {
+                case 1:
+                    manageProducts();
+                    break;
+                case 2:
+                    searchProducts();
+                    break;
+                case 3:
+                    displayProducts();
+                    break;
+                case 0:
+                    System.out.println("Thoát chương trình.");
+                    break;
+                default:
+                    System.out.println("Lựa chọn không hợp lệ.");
+            }
+        } while (choice != 0);
+    }
+}
