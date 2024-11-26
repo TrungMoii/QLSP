@@ -11,6 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
         while(true) {
+            System.out.println("=== MENU CHÍNH ===");
             System.out.println("1. Quản lý sản phẩm");
             System.out.println("2. Quản lý danh mục sản phẩm");
             System.out.println("3. Quản lý nhà cung cấp");
